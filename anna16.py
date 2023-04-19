@@ -14,7 +14,7 @@ from keras import backend as kb
 from tensorflow import cast,float32
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.optimizers import Adam
-from tensorflow.keras.models import Sequential
+from tensorflow.keras.models import Sequential, load_model
 
 class Preprocessing():
     def __init__(self,k_size=6):
