@@ -1,21 +1,20 @@
+import os
+import shutil
 import numpy as np
-from sklearn.feature_extraction.text import CountVectorizer
 import pandas as pd
 from math import sqrt
-from tensorflow.keras.models import Sequential
+from zipfile import ZipFile
+from statistics import mean, stdev
+from sklearn.svm import SVR
+from sklearn.decomposition import PCA
+from sklearn.linear_model import Ridge
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.feature_extraction.text import CountVectorizer
+from keras import backend as kb
+from tensorflow import cast,float32
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.optimizers import Adam
-from tensorflow import cast,float32
-from keras import backend as kb
-from statistics import mean, stdev
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.decomposition import PCA
-from sklearn.neighbors import KNeighborsRegressor
-from sklearn.linear_model import Ridge, Lasso, LinearRegression
-from sklearn.svm import SVR
-import os
-import ZipFile
-import shutil
+from tensorflow.keras.models import Sequential
 
 class Preprocessing():
     def __init__(self,k_size=6):
