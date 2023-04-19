@@ -1,8 +1,8 @@
 # ANNA16
 
-This folder releases the notebook for training ANNA16, an end-to-end, web-based tool that predicts 16S rRNA gene copy number (GCN) from 16S rRNA sequence.
+This repository releases ANNA16, an end-to-end, web-based tool that predicts 16S rRNA gene copy number (GCN) from 16S rRNA sequence.
 
-To use ANNA16, please visit http://anna16mlp.herokuapp.com/.
+To use ANNA16, please visit https://colab.research.google.com/drive/1XwpTMCHSfTmzpHyKrmiD8aC8C_1nndUV#scrollTo=V_Fe5x8g8sCv.
 
 To cite ANNA16:
 
