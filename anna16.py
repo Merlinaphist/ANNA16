@@ -14,6 +14,7 @@ from sklearn.neighbors import KNeighborsRegressor
 from sklearn.linear_model import Ridge, Lasso, LinearRegression
 from sklearn.svm import SVR
 import os
+import ZipFile
 
 class Preprocessing():
     def __init__(self,k_size=6):
