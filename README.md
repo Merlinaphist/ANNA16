@@ -42,7 +42,7 @@ export PATH=$PATH:/path/to/ANNA16/
 
 ```bash
 numpy
-pandas==2.7.3
+pandas
 scikit-learn==1.1.2
 tensorflow==2.9.0
 ```

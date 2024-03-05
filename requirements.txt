@@ -1,7 +1,4 @@
-shutil
-pickle
 numpy
-pandas==2.7.3
-zipfile
+pandas
 scikit-learn==1.1.2
 tensorflow==2.9.0
