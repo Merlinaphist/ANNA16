@@ -8,10 +8,10 @@ import argparse
 import os
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-r', type=str, choices=["full_length", "V1-V2", "V1-V3", "V3-V4", "V4-V5", "V4", "V6-V8", "V7-V9"], help='Target Region')
-parser.add_argument('-t', type=str, choices=["True", "False"], help='Primers Trimmed')
-parser.add_argument('-i', type=str, help='Input File')
-parser.add_argument('-o', type=str, default="", help='Output File')
+parser.add_argument('-r', type=str, choices=["full_length", "V1-V2", "V1-V3", "V3-V4", "V4-V5", "V4", "V6-V8", "V7-V9"], help='Target Region', required=True)
+parser.add_argument('-t', type=str, choices=["True", "False"], help='Primers Trimmed', required=True)
+parser.add_argument('-i', action='append', nargs='+', help='Input File', required=True)
+parser.add_argument('-o', action='append', nargs='*', help='Output File')
 
 args = parser.parse_args()
 
@@ -36,7 +36,7 @@ model.load(filename=target_file)
 
 uploaded_seqs = {}
 pp = Preprocessing()
-for filename in args.i.split(" "):
+for filename in args.i[0]:
     if filename.split(".")[-1] not in ["fasta","fna","fa"]:
         raise ValueError('Invalid file format. Expected formats are ["fasta","fna","fa"].')
     else:
@@ -53,14 +53,13 @@ for task_name in task_names:
                                       columns = ["predicted_copy_number"])
 
 #Save Prediction Results
-customized_filename = args.o
 for i in range(len(task_names)):
     task_name = task_names[i]
-    if customized_filename == "":
+    if args.o == None:
         suffix = filename.split(".")[-1]
         downloaded_filename = task_name.split("."+suffix)[0]+".csv"
     else:
-        downloaded_filename = customized_filename.split(" ")[i]+".csv"
+        downloaded_filename = args.o[0][i]+".csv"
     values = results[task_name]["predicted_copy_number"].values.tolist()
     indices = results[task_name].index.tolist()
     with open(downloaded_filename, 'w') as f:
@@ -68,8 +67,3 @@ for i in range(len(task_names)):
         for i in range(len(values)):
             line = str(indices[i])+","+str(values[i])+"\n"
             f.write(line)
-
-"""## **Please cite us if you use ANNA16:**
-
-+ Miao, J., Chen, T., Misir, M., & Lin, Y. (2022). Deep Learning for Predicting 16S rRNA Copy Number. *bioRxiv*, 2022.2011.2026.518038. https://doi.org/10.1101/2022.11.26.518038
-"""
