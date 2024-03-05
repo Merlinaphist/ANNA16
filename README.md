@@ -50,7 +50,7 @@ tensorflow==2.9.0
 We recommend create an environment for ANNA16 to host the Python dependencies:
 
 ```bash
-conda create --name anna16 python=3.8
+conda create -n anna16 python=3.9
 conda activate anna16
 pip install -r ANNA16/requirements.txt
 ```
@@ -77,7 +77,7 @@ Options: `[True, False]`
 An example command is:
 
 ```bash
-./run_anna16.py -r full_length -t True -i input0.fasta input1.fasta -o pred0 pred1
+run_anna16.py -r full_length -t True -i input0.fasta input1.fasta -o pred0 pred1
 ```
 
 # Cite ANNA16:
