@@ -59,7 +59,7 @@ pip install requirements.txt
 **(3) Run ANNA16**
 
 ```bash
-run_anna16.py -r <REGION> -t <TRIM> -i <INPUT_FILE> -o <OUTPUT_FILE>
+run_anna16.py -r <REGION> -t <TRIM> -i <INPUT_FILE(S)> -o <OUTPUT_FILE(S)>
 ```
 
 **Required Parameters:**
