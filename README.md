@@ -41,10 +41,8 @@ export PATH=$PATH:/path/to/ANNA16/
 **(2) Python Dependencies**
 
 ```bash
-pickle
 numpy
 pandas==2.7.3
-zipfile
 scikit-learn==1.1.2
 tensorflow==2.9.0
 ```
