@@ -53,6 +53,7 @@ tensorflow==2.9.0
 To quickly install all packages, run:
 
 ```bash
+cd ANNA16
 pip install requirements.txt
 ```
 
