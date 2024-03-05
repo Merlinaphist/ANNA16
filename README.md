@@ -41,7 +41,6 @@ export PATH=$PATH:/path/to/ANNA16/
 **(2) Python Dependencies**
 
 ```bash
-shutil
 pickle
 numpy
 pandas==2.7.3
@@ -50,11 +49,12 @@ scikit-learn==1.1.2
 tensorflow==2.9.0
 ```
 
-To quickly install all packages, run:
+We recommend create an environment for ANNA16 to host the Python dependencies:
 
 ```bash
-cd ANNA16
-pip install requirements.txt
+conda create --name anna16 python=3.8
+conda activate anna16
+pip install -r ANNA16/requirements.txt
 ```
 
 **(3) Run ANNA16**
