@@ -1,7 +1,7 @@
 # About ANNA16
 ANNA16 is an end-to-end tool that predicts 16S rRNA gene copy number (GCN) from 16S rRNA gene sequence. The tool utilizes an ensembled architecture of Multi-layer Perceptron (MLP), Support Vector Machine (SVM), and Ridge Regression. This repository releases the model weights of ANNA16.
 
-![Summary of ANNA16](ANNA16_summary.png){width=65%}
+![Summary of ANNA16](ANNA16_summary.png)
 
 # Use ANNA16
 
@@ -34,7 +34,8 @@ Alternatively, ANNA16 can be installed on a local server.
 
 ```bash
 git clone https://github.com/Merlinaphist/ANNA16.git
-export PATH="path/to/ANNA16:$PATH"
+chmod +x /path/to/ANNA16/run_anna16.py
+export PATH=$PATH:/path/to/ANNA16/
 ```
 
 **(2) Python Dependencies**
@@ -43,10 +44,10 @@ export PATH="path/to/ANNA16:$PATH"
 shutil
 pickle
 numpy
-pandas
+pandas==2.7.3
 zipfile
-scikit-learn
-tensorflow
+scikit-learn==1.1.2
+tensorflow==2.9.0
 ```
 
 To quickly install all packages, run:
@@ -58,7 +59,7 @@ pip install requirements.txt
 **(3) Run ANNA16**
 
 ```bash
-./run_anna16.py -r <REGION> -t <TRIM> -i <INPUT_FILE> -o <OUTPUT_FILE>
+run_anna16.py -r <REGION> -t <TRIM> -i <INPUT_FILE> -o <OUTPUT_FILE>
 ```
 
 **Required Parameters:**
