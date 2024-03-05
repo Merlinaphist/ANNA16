@@ -5,6 +5,7 @@ import numpy as np
 import warnings
 warnings.filterwarnings("ignore")
 import argparse
+import os
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-r', type=str, choices=["full_length", "V1-V2", "V1-V3", "V3-V4", "V4-V5", "V4", "V6-V8", "V7-V9"], help='Target Region')
@@ -22,7 +23,7 @@ model = CopyNumberPredictor(region=targeted_region)
 
 ##trimmed?
 primers_trimmed = args.t
-path_to_model = 'model_files/'
+path_to_model = __file__.split("run_anna16.py")[0] + 'model_files/'
 
 if primers_trimmed == "False":
     target_file = path_to_model+"untrimmed/"+targeted_region+".zip"
