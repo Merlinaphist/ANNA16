@@ -36,6 +36,7 @@ Alternatively, ANNA16 can be installed on a local server.
 git clone https://github.com/Merlinaphist/ANNA16.git
 chmod +x /path/to/ANNA16/run_anna16.py
 echo 'export PATH=$PATH:/path/to/ANNA16/' >> ~/.bashrc
+source ~/.bashrc
 ```
 
 **(2) Python Dependencies**
