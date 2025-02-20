@@ -1,62 +1,93 @@
 # About ANNA16
 ANNA16 is an end-to-end tool that predicts 16S rRNA gene copy number (GCN) from 16S rRNA gene sequence. The tool utilizes an ensembled architecture of Multi-layer Perceptron (MLP), Support Vector Machine (SVM), and Ridge Regression. This repository releases the model weights of ANNA16.
 
-![Summary of ANNA16](ANNA16_summary.png)
+![Summary of ANNA16](assets/ANNA16_summary.png)
 
-# Use ANNA16
+- [Updates](#updates-)
+- [User Guide](#user_guide-)
+    - [Colab](#colab-)
+    - [Local](#local_device-)
+        - [Installation](#installation-)
+        - [Preprocessing](#preprocessing-)
+        - [Usage](#usage-)
+- [Cite ANNA16](#citation-)
 
-## Data Preprocessing
+# Updates <a name="updates"></a>
 
-+ Prepare FASTA, FNA, or FA files of **DNA** sequences that encode your target 16S rRNA genes.
-+ The sequences must be **positive** strands.
-+ We recommend trimming the sequences with the primers listed in the following table:
+`v1.1`:
+1. Change the primer sequence of `1492R` to the more common format: `TAC GGY TAC CTT GTT ACG ACT T` (one additional `T`at the end). Re-train the model weights for trimmed full-length and V7-V9.
+2. Add `extract_regions.sh` for sequence preprocessing. This script extracts the 16S rRNA full-length or subregions from the input FASTA file and unifies the sequence orientation.
+3. Update `tensorflow` version requirements to `2.17.0` to accommodate the development of new GPUs and CUDA framework.
+
+
+# User Guide <a name="user_guide"></a>
+
+## Colab Notebook <a name="colab"></a>
+
+ANNA16 can be run on Google Colab. Please visit https://colab.research.google.com/drive/1XwpTMCHSfTmzpHyKrmiD8aC8C_1nndUV#scrollTo=V_Fe5x8g8sCv.
+
+## Local Device <a name="local_device"></a>
+
+Alternatively, ANNA16 can be installed on a local device.
+
+### Installation <a name="installation"></a>
+
+We recommend create a separate environment to host ANNA16:
+
+```bash
+conda env create -f anna16_env.yaml
+conda activate anna16
+git clone https://github.com/Merlinaphist/ANNA16.git
+cd ANNA16
+pip install .
+chmod +x "`pwd`/extract_regions.sh"
+chmod +x "`pwd`/run_anna16.py"
+echo "export PATH=$PATH:`pwd`" >> ~/.bashrc
+source ~/.bashrc
+```
+
+### Preprocessing <a name="preprocessing"></a>
+
+The input to ANNA16 needs to be:
+
+1. FASTA, FNA, or FA files of **DNA** sequences;
+2. **Positive** strands sequences;
+3. Trimmed with the following primers:
 
 | Region | Forward Primer Name | Forward Primer Sequence | Reverse Primer Name |Reverse Primer |
 |-------:|--------------------:|------------------------:|-----------:|--------------:|
-| Full Length | 27F | AGA GTT TGA TCC TGG CTC AG     | 1492R | TAC GGY TAC CTT GTT ACG ACT     |
+| Full Length | 27F | AGA GTT TGA TCC TGG CTC AG     | 1492R | TAC GGY TAC CTT GTT ACG ACT T    |
 | V1-V2       | 27F | AGA GTT TGA TCC TGG CTC AG     | 338R | GCT GCC TCC CGT AGG AGT         |
 | V1-V3       | 27F | AGA GTT TGA TCC TGG CTC AG     | 534R | ATT ACC GCG GCT GCT GG          |
 | V3-V4       | 341F | CCT ACG GGA GGC AGC AG         | 785R | GAC TAC HVG GGT ATC TAA TCC     |
 | V4          | 515F | GTG CCA GCM GCC GCG GTA A      | 806R | GGA CTA CHV GGG TWT CTA AT      |
 | V4-V5       | 515F | GTG CCA GCM GCC GCG GTA A      | 926R | CCG YCA ATT YMT TTR AGT TT      |
 | V6-V8       | 939F | GAA TTG ACG GGG GCC CGC ACA AG | 1378R | CGG TGT GTA CAA GGC CCG GGA ACG |
-| V7-V9       | 1115F | CAA CGA GCG CAA CCC T          | 1492R | TAC GGY TAC CTT GTT ACG ACT     |
+| V7-V9       | 1115F | CAA CGA GCG CAA CCC T          | 1492R | TAC GGY TAC CTT GTT ACG ACT T    |
 
-## Colab Notebook
-
-ANNA16 can be run on Google Colab. Please visit https://colab.research.google.com/drive/1XwpTMCHSfTmzpHyKrmiD8aC8C_1nndUV#scrollTo=V_Fe5x8g8sCv.
-
-## Local Server
-
-Alternatively, ANNA16 can be installed on a local server.
-
-**(1) Download ANNA16**
+We recommend using the `extract_regions.sh` script to preprocess the input files.
 
 ```bash
-git clone https://github.com/Merlinaphist/ANNA16.git
-chmod +x /path/to/ANNA16/run_anna16.py
-echo 'export PATH=$PATH:/path/to/ANNA16/' >> ~/.bashrc
-source ~/.bashrc
+extract_regions.sh -i <input_file> -o <output_prefix> -s <start> -e <end> -t <tmp_dir>
 ```
+`-i` - Input FASTA file
 
-**(2) Python Dependencies**
+`-o` - Prefix of the output file
+
+`-s` - Start of hypervariable region (options: V1, V3, V4, V6, V7)
+
+`-e` - End of hypervariable region (options: V2, V3, V4, V5, V8, V9)
+
+`-t` - Folder for storing temporary files
+
+An example command is:
 
 ```bash
-numpy
-pandas
-scikit-learn==1.1.2
-tensorflow==2.9.0
+mkdir tmp
+extract_regions.sh -i raw_data/input.fasta -o intermediate_data/trimmed_full_length -s V1 -e V9 -t tmp
 ```
 
-We recommend create an environment for ANNA16 to host the Python dependencies:
-
-```bash
-conda create -n anna16 python=3.9
-conda activate anna16
-pip install -r ANNA16/requirements.txt
-```
-
-**(3) Run ANNA16**
+### Usage <a name="usage"></a>
 
 ```bash
 run_anna16.py -r <REGION> -t <TRIM> -i <INPUT_FILE(S)> -o <OUTPUT_FILE(S)>
@@ -81,6 +112,6 @@ An example command is:
 run_anna16.py -r full_length -t True -i input0.fasta input1.fasta -o pred0 pred1
 ```
 
-# Cite ANNA16:
+# Cite ANNA16 <a name="citation"></a>
 
 Miao, J., Chen, T., Misir, M., & Lin, Y. (2024). Deep Learning for Predicting 16S rRNA Gene Copy Number. *Scientific reports*, 14(14282). https://doi.org/10.1038/s41598-024-64658-5 
