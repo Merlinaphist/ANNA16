@@ -44,9 +44,9 @@ conda activate anna16
 git clone https://github.com/Merlinaphist/ANNA16.git
 cd ANNA16
 pip install .
-chmod +x "`pwd`/extract_regions.sh"
-chmod +x "`pwd`/run_anna16.py"
-echo "export PATH=$PATH:`pwd`" >> ~/.bashrc
+chmod +x "`pwd`/bin/extract_regions.sh"
+chmod +x "`pwd`/bin/run_anna16.py"
+echo "export PATH=$PATH:`pwd`/bin" >> ~/.bashrc
 source ~/.bashrc
 ```
 
