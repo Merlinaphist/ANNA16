@@ -93,7 +93,7 @@ extract_regions.sh -i raw_data/input.fasta -o intermediate_data/trimmed_full_len
 
 ### Usage <a name="usage"></a>
 
-To use ANNA16 in a `py` or `ipynb` script:
+#### To use ANNA16 in a `py` or `ipynb` script:
 
 ```python
 from anna16 import Preprocessing, CopyNumberPredictor
@@ -106,7 +106,7 @@ model.load(filename=f"model_files/trimmed/{region}.zip")
 copy_number_pred = model.predict(kmer_counts)
 ```
 
-To use ANNA16 as a command-line tool:
+#### To use ANNA16 as a command-line tool:
 
 ```bash
 run_anna16.py -r <REGION> -t <TRIM> -i <INPUT_FILE(S)> -o <OUTPUT_FILE(S)>
