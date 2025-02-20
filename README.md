@@ -28,7 +28,7 @@ ANNA16 is an end-to-end tool that predicts 16S rRNA gene copy number (GCN) from 
 
 ## Colab Notebook <a name="colab"></a>
 
-ANNA16 can be run on Google Colab. Please visit https://colab.research.google.com/drive/1XwpTMCHSfTmzpHyKrmiD8aC8C_1nndUV#scrollTo=V_Fe5x8g8sCv.
+ANNA16 can be run on Google Colab. Please visit https://colab.research.google.com/drive/1XwpTMCHSfTmzpHyKrmiD8aC8C_1nndUV#scrollTo=V_Fe5x8g8sCv
 
 ## Local Device <a name="local_device"></a>
 
