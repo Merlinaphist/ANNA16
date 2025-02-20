@@ -1,16 +1,17 @@
+- [Updates](#updates-)
+- [User Guide](#user_guide-)
+    - [Colab Notebook](#colab-)
+    - [Local Device](#local_device-)
+        - [Installation](#installation-)
+        - [Preprocessing](#preprocessing-)
+        - [Usage](#usage-)
+- [Cite ANNA16](#citation-)
+
 # About ANNA16
 ANNA16 is an end-to-end tool that predicts 16S rRNA gene copy number (GCN) from 16S rRNA gene sequence. The tool utilizes an ensembled architecture of Multi-layer Perceptron (MLP), Support Vector Machine (SVM), and Ridge Regression. This repository releases the model weights of ANNA16.
 
 ![Summary of ANNA16](assets/ANNA16_summary.png)
 
-- [Updates](#updates-)
-- [User Guide](#user_guide-)
-    - [Colab](#colab-)
-    - [Local](#local_device-)
-        - [Installation](#installation-)
-        - [Preprocessing](#preprocessing-)
-        - [Usage](#usage-)
-- [Cite ANNA16](#citation-)
 
 # Updates <a name="updates"></a>
 
