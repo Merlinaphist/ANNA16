@@ -1,3 +1,5 @@
+[Work in Progress]
+
 - [Updates](#updates-)
 - [User Guide](#user_guide-)
     - [Colab Notebook](#colab-)
@@ -19,6 +21,7 @@ ANNA16 is an end-to-end tool that predicts 16S rRNA gene copy number (GCN) from 
 1. Change the primer sequence of `1492R` to the more common format: `TAC GGY TAC CTT GTT ACG ACT T` (one additional `T`at the end). Re-train the model weights for trimmed full-length and V7-V9.
 2. Add `extract_regions.sh` for sequence preprocessing. This script extracts the 16S rRNA full-length or subregions from the input FASTA file and unifies the sequence orientation.
 3. Update `tensorflow` version requirements to `2.17.0` to accommodate the development of new GPUs and CUDA framework.
+4. `anna16` is now a Python package that can be imported
 
 
 # User Guide <a name="user_guide"></a>
@@ -89,6 +92,21 @@ extract_regions.sh -i raw_data/input.fasta -o intermediate_data/trimmed_full_len
 ```
 
 ### Usage <a name="usage"></a>
+
+To use ANNA16 in a `py` or `ipynb` script:
+
+```python
+from anna16 import Preprocessing, CopyNumberPredictor
+region = "V1-V2" #Options: [full_length, V1-V2, V1-V3, V3-V4, V4-V5, V4, V6-V8, V7-V9]
+pp = Preprocessing()
+seqs = pp.ReadFASTA(filename)
+kmer_counts = pp.CountKmers(seqs)
+model = CopyNumberPredictor(region=region) 
+model.load(filename=f"model_files/trimmed/{region}.zip")
+copy_number_pred = model.predict(kmer_counts)
+```
+
+To use ANNA16 as a command-line tool:
 
 ```bash
 run_anna16.py -r <REGION> -t <TRIM> -i <INPUT_FILE(S)> -o <OUTPUT_FILE(S)>
