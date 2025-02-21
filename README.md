@@ -1,7 +1,7 @@
 [Work in Progress]
 # About ANNA16
 
-- [Updates](#updates-)
+- [Update Log](#updates-)
 - [User Guide](#user_guide-)
     - [Colab Notebook](#colab-)
     - [Local Device](#local_device-)
@@ -15,7 +15,7 @@ ANNA16 is an end-to-end tool that predicts 16S rRNA gene copy number (GCN) from 
 ![Summary of ANNA16](assets/ANNA16_summary.png)
 
 
-# Updates <a name="updates"></a>
+# Update Log <a name="updates"></a>
 
 `v1.1`:
 1. Change the primer sequence of `1492R` to the more common format: `TAC GGY TAC CTT GTT ACG ACT T` (one additional `T`at the end). Re-train the model weights for trimmed full-length and V7-V9.
