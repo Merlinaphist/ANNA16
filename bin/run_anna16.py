@@ -18,19 +18,20 @@ args = parser.parse_args()
 #Initialize the Model
 
 ##targeted region
-targeted_region = args.r
-model = CopyNumberPredictor(region=targeted_region)
+# targeted_region = 
+model = CopyNumberPredictor(region=args.r)
 
 ##trimmed?
-primers_trimmed = args.t
-path_to_model = __file__.split("bin/run_anna16.py")[0] + 'model_files/'
+trim_or_not={"True":"trimmed", "False":"untrimmed"}
+# primers_trimmed = args.t
+# path_to_model = __file__.split("bin/run_anna16.py")[0] + 'model_files/'
 
-if primers_trimmed == "False":
-    target_file = path_to_model+"untrimmed/"+targeted_region+".zip"
-else:
-    target_file = path_to_model+"trimmed/"+targeted_region+".zip"
+# if primers_trimmed == "False":
+#     target_file = path_to_model+"untrimmed/"+targeted_region+".zip"
+# else:
+#     target_file = path_to_model+"trimmed/"+targeted_region+".zip"
 
-model.load(filename=target_file)
+model.load(filename=f"model_files/{trim_or_not[args.t]}/{args.r}.zip")
 
 #Input FASTA files
 
