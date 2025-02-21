@@ -69,7 +69,8 @@ The input to ANNA16 needs to be:
 | V6-V8       | 939F | GAA TTG ACG GGG GCC CGC ACA AG | 1378R | CGG TGT GTA CAA GGC CCG GGA ACG |
 | V7-V9       | 1115F | CAA CGA GCG CAA CCC T          | 1492R | TAC GGY TAC CTT GTT ACG ACT T    |
 
-We recommend using the `extract_regions.sh` script to preprocess the input files.
+We recommend using the `extract_regions.sh` script to preprocess the input files. 
+This script calls [cutadapt](https://cutadapt.readthedocs.io/en/stable/) to identify the regions of interest.
 
 ```bash
 extract_regions.sh -i <input_file> -o <output_prefix> -s <start> -e <end> -t <tmp_dir>
