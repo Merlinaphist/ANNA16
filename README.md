@@ -43,8 +43,10 @@ We recommend create a separate environment to host ANNA16:
 ```bash
 git clone https://github.com/Merlinaphist/ANNA16.git
 cd ANNA16
-conda env create -f anna16_env.yaml
+conda create -n anna16
 conda activate anna16
+conda install python=3.9 cutadapt=5.0
+pip install scikit-learn==1.1.2 tensorflow[and-cuda]==2.17.0 numpy==1.26.4 pandas==2.0.2
 pip install -e .
 chmod +x "`pwd`/bin/extract_regions.sh"
 chmod +x "`pwd`/bin/run_anna16.py"
