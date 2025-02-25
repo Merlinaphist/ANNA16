@@ -1,6 +1,12 @@
 [Work in Progress]
 # About ANNA16
 
+ANNA16 is an end-to-end tool that predicts 16S rRNA gene copy number (GCN) from 16S rRNA gene sequence. The tool utilizes an ensembled architecture of Multi-layer Perceptron (MLP), Support Vector Machine (SVM), and Ridge Regression. This repository releases the model weights of ANNA16.
+
+![Summary of ANNA16](assets/ANNA16_summary.png)
+
+## Table of Contents
+
 - [Update Log](#updates-)
 - [User Guide](#user_guide-)
     - [Colab Notebook](#colab-)
@@ -9,10 +15,6 @@
         - [Preprocessing](#preprocessing-)
         - [Usage](#usage-)
 - [Cite ANNA16](#citation-)
-
-ANNA16 is an end-to-end tool that predicts 16S rRNA gene copy number (GCN) from 16S rRNA gene sequence. The tool utilizes an ensembled architecture of Multi-layer Perceptron (MLP), Support Vector Machine (SVM), and Ridge Regression. This repository releases the model weights of ANNA16.
-
-![Summary of ANNA16](assets/ANNA16_summary.png)
 
 
 # Update Log <a name="updates"></a>
@@ -39,10 +41,10 @@ Alternatively, ANNA16 can be installed on a local device.
 We recommend create a separate environment to host ANNA16:
 
 ```bash
-conda env create -f anna16_env.yaml
-conda activate anna16
 git clone https://github.com/Merlinaphist/ANNA16.git
 cd ANNA16
+conda env create -f anna16_env.yaml
+conda activate anna16
 pip install -e .
 chmod +x "`pwd`/bin/extract_regions.sh"
 chmod +x "`pwd`/bin/run_anna16.py"
