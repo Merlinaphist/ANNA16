@@ -44,15 +44,19 @@ class CopyNumberPredictor():
         shutil.make_archive(path, 'zip', path)
         shutil.rmtree(path)
             
-    def load(self,filename):
-        if filename[-4:] != ".zip":
-            raise ValueError('Invalid input file. Expect a zip file.')
+    def load(self,trimmed=True):
+        # if filename[-4:] != ".zip":
+        #     raise ValueError('Invalid input file. Expect a zip file.')
             
-        path = filename[:-4]
+        # path = filename[:-4]
         
-        if not os.path.exists(path):
-            os.makedirs(path)
-        
+        # if not os.path.exists(path):
+        #     os.makedirs(path)
+        trim_or_not={True:"trimmed", False:"untrimmed"}
+
+        path = f"{__file__.split("CopyNumerPredictor.py")[0]}model_files/{trim_or_not[trimmed]}"
+        filename = f"{path}/{self.region}.zip"
+
         with ZipFile(filename,'r') as zObject:
             zObject.extractall(path=path)
         
