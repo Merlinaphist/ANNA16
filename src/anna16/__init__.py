@@ -54,7 +54,7 @@ class CopyNumberPredictor():
         #     os.makedirs(path)
         trim_or_not={True:"trimmed", False:"untrimmed"}
 
-        path = f"{__file__.split("CopyNumerPredictor.py")[0]}model_files/{trim_or_not[trimmed]}"
+        path = f"{__file__.split('CopyNumerPredictor.py')[0]}model_files/{trim_or_not[trimmed]}"
         filename = f"{path}/{self.region}.zip"
 
         with ZipFile(filename,'r') as zObject:
