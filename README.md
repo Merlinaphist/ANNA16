@@ -77,7 +77,7 @@ We recommend using the `extract_regions.sh` script to preprocess the input files
 This script calls [cutadapt](https://cutadapt.readthedocs.io/en/stable/) to identify the regions of interest.
 
 ```bash
-extract_regions.sh -i <input_file> -o <output_prefix> -s <start> -e <end> -t <tmp_dir>
+extract_regions.sh -i <input_file> -o <output_prefix> -s <start> -e <end> -t <tmp_dir> -c <num_core>
 ```
 `-i` - Input FASTA file
 
@@ -89,11 +89,13 @@ extract_regions.sh -i <input_file> -o <output_prefix> -s <start> -e <end> -t <tm
 
 `-t` - Folder for storing temporary files
 
+`-c` - Number of cores
+
 An example command is:
 
 ```bash
 mkdir tmp
-extract_regions.sh -i raw_data/input.fasta -o intermediate_data/trimmed_full_length -s V1 -e V9 -t tmp
+extract_regions.sh -i raw_data/input.fasta -o intermediate_data/trimmed_full_length -s V1 -e V9 -t tmp -c 4
 ```
 
 ### Usage <a name="usage"></a>
