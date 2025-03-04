@@ -43,7 +43,7 @@ def predict_from_fasta(args):
     output_file.close()
 
 
-for i in range(args.i[0]):
+for i in range(len(args.i[0])):
     input_name = args.i[0][i]
     if input_name.split(".")[-1] not in ["fasta","fna","fa"]:
         raise ValueError('Invalid file format. Expected formats are ["fasta","fna","fa"].')
