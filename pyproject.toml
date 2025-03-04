@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "anna16"
+version = "1.1.0"
+description = "ANNA16 is an end-to-end tool that predicts 16S rRNA gene copy number (GCN) from 16S rRNA gene sequence."
+license = {file = "LICENSE"}
+readme = "README.md"
+requires-python = "=3.9"
+dependencies = [
+    "scikit-learn==1.1.2",
+    "tensorflow[and-cuda]==2.17.0",
+    "numpy==1.26.4",
+    "pandas==2.0.2",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+anna16 = ["model_files/trimmed/*.zip", "model_files/untrimmed/*.zip"]  # Include small model files if needed
