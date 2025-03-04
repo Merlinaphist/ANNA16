@@ -8,7 +8,7 @@ version = "1.1.0"
 description = "ANNA16 is an end-to-end tool that predicts 16S rRNA gene copy number (GCN) from 16S rRNA gene sequence."
 license = {file = "LICENSE"}
 readme = "README.md"
-requires-python = "=3.9"
+requires-python = ">=3.9"
 dependencies = [
     "scikit-learn==1.1.2",
     "tensorflow[and-cuda]==2.17.0",
