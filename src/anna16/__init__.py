@@ -190,21 +190,23 @@ class Preprocessing():
             return seqs, seqid
 
 
-# def predict_from_fasta(input_name, output_name, model):
-#     pp = Preprocessing()
-#     input_file = open(input_name,"r")
-#     output_file = open(output_name, 'w')
-#     output_file.write("index,predicted_copy_number\n")
-#     tmp_seq = ""
-#     for line in input_file:
-#         if line[0] != ">":
-#             tmp_seq+=line.split("\n")[0]
-#         else:
-#             if tmp_seq != "":
-#                 X = pp.CountKmers([tmp_seq])
-#                 pred = model.predict(X)[0]
-#                 output_file.write(f"{seqid},{pred}\n")
-#             tmp_seq = ""
-#             seqid = line.split("\n")[0][1:]       
-#     input_file.close()
-#     output_file.close()
+def predict_from_fasta(input_name, output_name, model):
+    pp = Preprocessing()
+    input_file = open(input_name,"r")
+    output_file = open(output_name, 'w')
+    output_file.write("index,predicted_copy_number\n")
+    output_file.flush()
+    tmp_seq = ""
+    for line in input_file:
+        if line[0] != ">":
+            tmp_seq+=line.split("\n")[0]
+        else:
+            if tmp_seq != "":
+                X = pp.CountKmers([tmp_seq])
+                pred = model.predict(X)[0]
+                output_file.write(f"{seqid},{pred}\n")
+                output_file.flush()
+            tmp_seq = ""
+            seqid = line.split("\n")[0][1:]       
+    input_file.close()
+    output_file.close()

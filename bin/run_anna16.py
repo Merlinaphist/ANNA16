@@ -21,17 +21,6 @@ model = CopyNumberPredictor(region=args.r)
 model.load(args.t == "True")
 pp = Preprocessing()
 
-# for i in range(len(args.i[0])):
-#     input_name = args.i[0][i]
-#     if input_name.split(".")[-1] not in ["fasta","fna","fa"]:
-#         raise ValueError('Invalid file format. Expected formats are ["fasta","fna","fa"].')
-#     if args.o == None:
-#         suffix = input_name.split(".")[0]
-#         output_name = suffix+".csv"
-#     else:
-#         output_name = args.o[0][i]+".csv"
-#     predict_from_fasta(input_name, output_name, model)
-
 
 #Input FASTA files
 uploaded_seqs = {}
