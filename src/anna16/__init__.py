@@ -50,26 +50,24 @@ class CopyNumberPredictor():
             
         # path = filename[:-4]
         
-        # if not os.path.exists(path):
-        #     os.makedirs(path)
         trim_or_not={True:"trimmed", False:"untrimmed"}
 
         path = f"{__file__.split('__init__.py')[0]}model_files/{trim_or_not[trimmed]}"
-        filename = f"{path}/{self.region}.zip"
+        prefix = f"{path}/{self.region}"
 
-        with ZipFile(filename,'r') as zObject:
-            zObject.extractall(path=path)
+        if not os.path.isfile(f'{prefix}_mlp.h5'):
+            with ZipFile(f"{prefix}.zip",'r') as zObject:
+                zObject.extractall(path=path)
         
-        prefix = path + "/" + self.region
-        with open(prefix+'_pca.pkl', 'rb') as file:
+        with open(f'{prefix}_pca.pkl', 'rb') as file:
             self.pca = pickle.load(file) 
-        with open(prefix+'_ridge.pkl', 'rb') as file:
+        with open(f'{prefix}_ridge.pkl', 'rb') as file:
             self.ridge = pickle.load(file)
-        with open(prefix+'_svr.pkl', 'rb') as file:
+        with open(f'{prefix}_svr.pkl', 'rb') as file:
             self.svr = pickle.load(file)
-        self.mlp = load_model(prefix + "_mlp.h5",
+        self.mlp = load_model(f'{prefix}_mlp.h5',
                               custom_objects={"root_mean_squared_error": self.root_mean_squared_error})
-        shutil.rmtree(path)
+        # shutil.rmtree(path)
         
     def fit(self,X_train,Y_train,verbose=True):
         self.echo(text = "------Training Starts------", verbose = verbose)
