@@ -95,7 +95,9 @@ An example command is:
 
 ```bash
 mkdir tmp
-extract_regions.sh -i raw_data/input.fasta -o intermediate_data/trimmed_full_length -s V1 -e V9 -t tmp -c 4
+extract_regions.sh -i raw_data/input.fasta \
+                   -o intermediate_data/trimmed_full_length \
+                   -s V1 -e V9 -t tmp -c 4
 ```
 
 ### Usage <a name="usage"></a>
