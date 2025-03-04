@@ -13,6 +13,7 @@ usage() {
     echo "  -s  Start of hypervariable region (options: V1, V3, V4, V6, V7)"
     echo "  -e  End of hypervariable region (options: V2, V3, V4, V5, V8, V9)"
     echo "  -t  Folder for storing temporary files"
+    echo "  -c  Number of cores"
     exit 1
 }
 
@@ -20,13 +21,14 @@ START_OPTIONS=("V1" "V3" "V4" "V6" "V7")
 END_OPTIONS=("V2" "V3" "V4" "V5" "V8" "V9")
 
 # Parse command-line arguments
-while getopts ":hi:o:s:e:t:" opt; do
+while getopts ":hi:o:s:e:t:c:" opt; do
     case $opt in
         i) INPUT_FILE="$OPTARG" ;;
         o) OUTPUT_FILE="$OPTARG" ;;
         s) START="$OPTARG" ;;
         e) END="$OPTARG" ;;
         t) TMP_PATH="$OPTARG" ;;
+        c) NUM_CORES="$OPTARG" ;;
         h) usage ;;
         *) usage ;;
     esac
@@ -75,11 +77,11 @@ END_PRIMER_REV=`cat ${SCRIPT_DIR}/primers/${END}_end_rev.txt`
 
 # Trim sequences using forward primers
 cutadapt -g "$START_PRIMER_FWD"..."$END_PRIMER_FWD" \
-         -e 0.2 -j 4 \
+         -e 0.2 -j $NUM_CORES \
          --untrimmed-output $TMP_PATH/tmp_fw_untrimmed.fasta -o $TMP_PATH/tmp_fw.fasta $INPUT_FILE
 
 cutadapt -g "$END_PRIMER_REV"..."$START_PRIMER_REV" \
-         -e 0.2 -j 4 \
+         -e 0.2 -j $NUM_CORES \
          --untrimmed-output ${OUTPUT_FILE}_unidentified.fasta -o $TMP_PATH/tmp_rc.fasta $TMP_PATH/tmp_fw_untrimmed.fasta
 
 awk '
