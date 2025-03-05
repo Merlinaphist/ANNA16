@@ -112,7 +112,7 @@ pp = Preprocessing()
 seqs = pp.ReadFASTA(filename)
 kmer_counts = pp.CountKmers(seqs)
 model = CopyNumberPredictor(region=region) 
-model.load(filename=f"model_files/trimmed/{region}.zip")
+model.load(trimmed=True)
 copy_number_pred = model.predict(kmer_counts)
 ```
 
