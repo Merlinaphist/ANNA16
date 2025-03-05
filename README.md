@@ -25,7 +25,6 @@ ANNA16 is an end-to-end tool that predicts 16S rRNA gene copy number (GCN) from 
 3. Update `tensorflow` version requirements to `2.17.0` to accommodate the development of new GPUs and CUDA framework.
 4. `anna16` is now a Python package that can be imported
 
-
 # User Guide <a name="user_guide"></a>
 
 ## Colab Notebook <a name="colab"></a>
@@ -134,8 +133,6 @@ Options: `[True, False]`
 **Optional Parameter:**
 
 `-o` - The filename of the output. Output will be saved in `csv` format. If not provided, output file(s) will take the same name(s) with the input.
-
-`--streaming` - Enable processing the input sequence by sequence. Use this argument when the file is too large to be loaded entirely into memory.
 
 An example command is:
 
