@@ -1,6 +1,5 @@
-import os
-import shutil
-import pickle
+#!/usr/bin/env python3
+import os, shutil, pickle
 import numpy as np
 import pandas as pd
 from zipfile import ZipFile
@@ -12,6 +11,7 @@ from tensorflow import cast,float32
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.models import Sequential, load_model
+from sklearn.feature_extraction.text import CountVectorizer
 
 class CopyNumberPredictor():
     def __init__(self,region):
@@ -131,8 +131,6 @@ class CopyNumberPredictor():
         self.mlp.fit(X_train,Y_train,validation_split=validation_split,
                      batch_size=batch_size,epochs=epochs,verbose=0)
 
-from sklearn.feature_extraction.text import CountVectorizer
-import pandas as pd
 
 class Preprocessing():
     def __init__(self, k_size=6):
@@ -193,9 +191,8 @@ class Preprocessing():
 def predict_from_fasta(input_name, output_name, model):
     pp = Preprocessing()
     input_file = open(input_name,"r")
-    output_file = open(output_name, 'w')
-    output_file.write("index,predicted_copy_number\n")
-    output_file.flush()
+    output_file = os.open(output_name, os.O_WRONLY | os.O_CREAT)
+    os.write(output_file, f"index,predicted_copy_number\n".encode())
     tmp_seq = ""
     for line in input_file:
         if line[0] != ">":
@@ -204,9 +201,8 @@ def predict_from_fasta(input_name, output_name, model):
             if tmp_seq != "":
                 X = pp.CountKmers([tmp_seq])
                 pred = model.predict(X)[0]
-                output_file.write(f"{seqid},{pred}\n")
-                output_file.flush()
+                os.write(output_file, f"{seqid},{pred}\n".encode())
             tmp_seq = ""
             seqid = line.split("\n")[0][1:]       
     input_file.close()
-    output_file.close()
+    os.close(output_file)
