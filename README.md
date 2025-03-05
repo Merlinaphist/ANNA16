@@ -135,6 +135,8 @@ Options: `[True, False]`
 
 `-o` - The filename of the output. Output will be saved in `csv` format. If not provided, output file(s) will take the same name(s) with the input.
 
+`--streaming` - Enable processing the input sequence by sequence. Use this argument when the file is too large to be loaded entirely into memory.
+
 An example command is:
 
 ```bash

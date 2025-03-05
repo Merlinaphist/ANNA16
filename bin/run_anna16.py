@@ -13,7 +13,7 @@ parser.add_argument('-r', type=str, choices=["full_length", "V1-V2", "V1-V3", "V
 parser.add_argument('-t', type=str, choices=["True", "False"], help='Primers Trimmed', required=True)
 parser.add_argument('-i', action='append', nargs='+', help='Input File', required=True)
 parser.add_argument('-o', action='append', nargs='*', help='Output File')
-parser.add_argument('--streaming', help='Process the input file sequence by sequence')
+parser.add_argument('--streaming', help='Process the input file sequence by sequence', action="store_true")
 
 args = parser.parse_args()
 
