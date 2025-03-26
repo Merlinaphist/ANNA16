@@ -32,8 +32,10 @@ Alternatively, ANNA16 can be installed on a local server.
 
 **(1) Download ANNA16**
 
+To use this `v1.0` version, please run:
+
 ```bash
-git clone https://github.com/Merlinaphist/ANNA16.git
+git clone -b v1.0 https://github.com/Merlinaphist/ANNA16.git
 chmod +x /path/to/ANNA16/run_anna16.py
 echo 'export PATH=$PATH:/path/to/ANNA16/' >> ~/.bashrc
 source ~/.bashrc
