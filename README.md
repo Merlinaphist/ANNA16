@@ -24,6 +24,8 @@ ANNA16 is an end-to-end tool that predicts 16S rRNA gene copy number (GCN) from 
 3. Update `tensorflow` version requirements to `2.17.0` to accommodate the development of new GPUs and CUDA framework.
 4. `anna16` is now a Python package that can be imported
 
+To install the older `v1.0` version, please visit [the branch repository](https://github.com/Merlinaphist/ANNA16/tree/v1.0).
+
 # User Guide <a name="user_guide"></a>
 
 ## Colab Notebook <a name="colab"></a>
