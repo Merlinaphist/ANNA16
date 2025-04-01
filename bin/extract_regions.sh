@@ -110,4 +110,4 @@ function revcomp(seq, rev, i, base, complement) {
 
 cat $TMP_PATH/tmp_fw.fasta $TMP_PATH/tmp_rc_rc.fasta > ${OUTPUT_FILE}.fasta
 
-rm $TMP_PATH/tmp_fw.fasta $TMP_PATH/tmp_rc_rc.fasta $TMP_PATH/tmp_rc.fasta
+rm $TMP_PATH/tmp_fw.fasta $TMP_PATH/tmp_rc_rc.fasta $TMP_PATH/tmp_rc.fasta $TMP_PATH/tmp_fw_untrimmed.fasta
