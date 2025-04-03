@@ -18,13 +18,9 @@ ANNA16 is an end-to-end tool that predicts 16S rRNA gene copy number (GCN) from 
 
 # Update Log <a name="updates"></a>
 
-`v1.1`:
-1. Change the primer sequence of `1492R` to the more common format: `TAC GGY TAC CTT GTT ACG ACT T` (one additional `T`at the end). Re-train the model weights for trimmed full-length and V7-V9.
-2. Add `extract_regions.sh` for sequence preprocessing. This script extracts the 16S rRNA full-length or subregions from the input FASTA file and unifies the sequence orientation.
-3. Update `tensorflow` version requirements to `2.17.0` to accommodate the development of new GPUs and CUDA framework.
-4. `anna16` is now a Python package that can be imported
+Please visit [the wiki](https://github.com/Merlinaphist/ANNA16/wiki) to learn about the updates in ANNA16.
 
-To install the older `v1.0` version, please visit [the branch repository](https://github.com/Merlinaphist/ANNA16/tree/v1.0).
+To install the older `v1.0` version, please visit [the v1.0 branch repository](https://github.com/Merlinaphist/ANNA16/tree/v1.0).
 
 # User Guide <a name="user_guide"></a>
 
