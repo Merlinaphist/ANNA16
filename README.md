@@ -18,9 +18,7 @@ ANNA16 is an end-to-end tool that predicts 16S rRNA gene copy number (GCN) from 
 
 # Update Log <a name="updates"></a>
 
-Please visit [the wiki](https://github.com/Merlinaphist/ANNA16/wiki) to learn about the updates in ANNA16.
-
-To install the older `v1.0` version, please visit [the v1.0 branch repository](https://github.com/Merlinaphist/ANNA16/tree/v1.0).
+To install the older `v1.0` version or learn about the updates in ANNA16, please visit [the wiki](https://github.com/Merlinaphist/ANNA16/wiki).
 
 # User Guide <a name="user_guide"></a>
 
