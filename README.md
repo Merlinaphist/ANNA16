@@ -35,8 +35,9 @@ Alternatively, ANNA16 can be installed on a local device.
 We recommend create a separate environment to host ANNA16:
 
 ```bash
-git clone https://github.com/Merlinaphist/ANNA16.git
-cd ANNA16
+wget https://github.com/Merlinaphist/ANNA16/archive/refs/tags/v1.1.0.zip
+unzip v1.1.0.zip
+cd ANNA16-1.1.0
 conda create -n anna16
 conda activate anna16
 conda install python=3.9 cutadapt=5.0
