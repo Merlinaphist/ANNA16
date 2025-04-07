@@ -6,31 +6,20 @@ ANNA16 is an end-to-end tool that predicts 16S rRNA gene copy number (GCN) from 
 
 ## Table of Contents
 
-- [Update Log](#updates-)
 - [User Guide](#user_guide-)
-    - [Colab Notebook](#colab-)
-    - [Local Device](#local_device-)
-        - [Installation](#installation-)
-        - [Preprocessing](#preprocessing-)
-        - [Usage](#usage-)
+    - [Update Log](#updates-)
+    - [Installation](#installation-)
+    - [Preprocessing](#preprocessing-)
+    - [Usage](#usage-)
 - [Cite ANNA16](#citation-)
-
-
-# Update Log <a name="updates"></a>
-
-To install the older `v1.0` version or learn about the updates in ANNA16, please visit [the wiki](https://github.com/Merlinaphist/ANNA16/wiki).
 
 # User Guide <a name="user_guide"></a>
 
-## Colab Notebook <a name="colab"></a>
+## Update Log <a name="updates"></a>
 
-ANNA16 can be run on Google Colab. Please visit https://colab.research.google.com/drive/1XwpTMCHSfTmzpHyKrmiD8aC8C_1nndUV#scrollTo=V_Fe5x8g8sCv
+To install the older `v1.0` version or learn about the updates in ANNA16, please visit [the wiki](https://github.com/Merlinaphist/ANNA16/wiki).
 
-## Local Device <a name="local_device"></a>
-
-Alternatively, ANNA16 can be installed on a local device.
-
-### Installation <a name="installation"></a>
+## Installation <a name="installation"></a>
 
 We recommend create a separate environment to host ANNA16:
 
@@ -49,7 +38,7 @@ echo "export PATH=$PATH:`pwd`/bin" >> ~/.bashrc
 source ~/.bashrc
 ```
 
-### Preprocessing <a name="preprocessing"></a>
+## Preprocessing <a name="preprocessing"></a>
 
 The input to ANNA16 needs to be:
 
@@ -96,9 +85,9 @@ extract_regions.sh -i raw_data/input.fasta \
                    -s V1 -e V9 -t tmp -c 4
 ```
 
-### Usage <a name="usage"></a>
+## Usage <a name="usage"></a>
 
-#### To use ANNA16 in a `py` or `ipynb` script:
+### ANNA16 as a Python Library
 
 ```python
 from anna16 import Preprocessing, CopyNumberPredictor
@@ -111,7 +100,7 @@ model.load(trimmed=True)
 copy_number_pred = model.predict(kmer_counts)
 ```
 
-#### To use ANNA16 as a command-line tool:
+### ANNA16 as a Command-Line Tool:
 
 ```bash
 run_anna16.py -r <REGION> -t <TRIM> -i <INPUT_FILE(S)> -o <OUTPUT_FILE(S)>
