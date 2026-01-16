@@ -87,7 +87,7 @@ extract_regions.sh -i raw_data/input.fasta \
 from anna16 import Preprocessing, get_model
 pp = Preprocessing()
 seqs = pp.ReadFASTA(filename)
-kmer_counts = pp.CountKmers(seqs)
+kmer_counts = pp.CountKmers(seqs['sequence'])
 model = get_model(ml_type="cuml") #Switch to "sklearn" if you want to use CPU version
 model.load(region="V1-V2" ) #Options: [full_length, V1-V2, V1-V3, V3-V4, V4-V5, V4, V6-V8, V7-V9]
 copy_number_pred = model.predict(kmer_counts)
@@ -96,7 +96,7 @@ copy_number_pred = model.predict(kmer_counts)
 ### ANNA16 as a Command-Line Tool:
 
 ```bash
-run_anna16.py -r <REGION> -m <ML LIBRARY> -i <INPUT_FILE(S)> -o <OUTPUT_FILE(S)>
+run_anna16.py -r <REGION> -m <ML_LIBRARY> -i <INPUT_FILE(S)> -o <OUTPUT_FILE(S)>
 ```
 
 **Required Parameters:**
