@@ -25,7 +25,7 @@ pp = Preprocessing()
 
 #Input FASTA files
 uploaded_seqs = {}
-for filename in args.i[0]:
+for filename in args.input[0]:
     if filename.split(".")[-1] not in ["fasta","fna","fa"]:
         raise ValueError('Invalid file format. Expected formats are ["fasta","fna","fa"].')
     else:
@@ -35,18 +35,18 @@ for filename in args.i[0]:
 task_names = list(uploaded_seqs.keys())
 results = {}
 for task_name in task_names:
-    X = pp.CountKmers(uploaded_seqs[task_name])
+    X = pp.CountKmers(uploaded_seqs[task_name]['sequence'])
     results[task_name] = model.predict(X)
     results[task_name] = pd.DataFrame(results[task_name],
-                                    index = uploaded_seqs[task_name].index,
+                                    index = uploaded_seqs[task_name]['seqid'],
                                     columns = ["predicted_copy_number"])
 
 #Save Prediction Results
 for i in range(len(task_names)):
     task_name = task_names[i]
-    if args.o == None:
+    if args.output == None:
         suffix = filename.split(".")[-1]
         downloaded_filename = task_name.split("."+suffix)[0]+".csv"
     else:
-        downloaded_filename = args.o[0][i]+".csv"
-    output_file = results[[task_name]].to_csv(downloaded_filename, index=True)
+        downloaded_filename = args.output[0][i]+".csv"
+    output_file = results[task_name].to_csv(downloaded_filename, index=True)
