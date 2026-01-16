@@ -9,7 +9,7 @@ import torch.optim as optim
 from torch.utils.data import DataLoader
 import numpy as np
 import pandas as pd
-import pickle
+import pickle, os
 
 
 class Preprocessing():
@@ -241,7 +241,9 @@ class ANNA16ModelSKLEARN(ANNA16Model):
             with open(f"{file_prefix}_{model_name}_skl.pkl", 'wb') as file:
                 pickle.dump(self.ml_models[model_name], file)
     
-    def load(self, file_prefix):
+    def load(self, region):
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        file_prefix=f"{current_dir}/model_files/{region}/{region}"
         self.mlp.load(f"{file_prefix}_mlp.pt")
         for model_name in self.ml_models:
             with open(f"{file_prefix}_{model_name}_skl.pkl", 'rb') as file:
@@ -266,7 +268,9 @@ class ANNA16ModelCUML(ANNA16Model):
                 with open(f"{file_prefix}_{model_name}_skl.pkl", 'wb') as file:
                     pickle.dump(self.ml_models[model_name].as_sklearn(), file)
 
-    def load(self, file_prefix, from_sklearn=True):
+    def load(self, region, from_sklearn=True):
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        file_prefix=f"{current_dir}/model_files/{region}/{region}"
         if from_sklearn not in [True, False]:
             raise ValueError('from_sklearn must be True or False')
         self.mlp.load(f"{file_prefix}_mlp.pt")

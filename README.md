@@ -14,16 +14,30 @@ The current page shows ANNA16 (Version 2.0). To install the older versions or le
 
 ## Installation <a name="installation"></a>
 
-We recommend create a separate environment to host ANNA16:
+We recommend create a separate environment to host ANNA16. 
+
+(Optional) ANNA16-v2.0 requires [cuml](https://github.com/rapidsai/cuml) for GPU-accelerated SVM. Please go download the version compatible with your CUDA.
+This step can be skipped if you want to use CPU version or meet compatibility issues. 
 
 ```bash
-wget https://github.com/Merlinaphist/ANNA16/archive/refs/tags/v1.1.0.zip
-unzip v1.1.0.zip
-cd ANNA16-1.1.0
-conda create -n anna16
-conda activate anna16
-conda install python=3.9 cutadapt=5.0
-pip install scikit-learn==1.1.2 tensorflow[and-cuda]==2.17.0 numpy==1.26.4 pandas==2.0.2
+wget https://github.com/Merlinaphist/ANNA16/archive/refs/tags/v2.0.0.zip
+unzip v2.0.0.zip
+cd ANNA16-2.0.0
+micromamba create -n anna16_v2 python=3.12 cutadapt=5.0
+micromamba activate anna16_v2
+
+#########################################################################
+# Substitute with versions compatible with your CUDA, or skip
+pip install \
+    --extra-index-url=https://pypi.nvidia.com \
+    "cudf-cu12==25.12.*" "dask-cudf-cu12==25.12.*" "cuml-cu12==25.12.*" \
+    "cugraph-cu12==25.12.*" "nx-cugraph-cu12==25.12.*" "cuxfilter-cu12==25.12.*" \
+    "cucim-cu12==25.12.*" "pylibraft-cu12==25.12.*" "raft-dask-cu12==25.12.*" \
+    "cuvs-cu12==25.12.*" "nx-cugraph-cu12==25.12.*"
+
+#########################################################################
+
+pip install torch==2.9.1 scikit-learn==1.6.1 pandas==2.2.3 biopython==1.85 matplotlib seaborn
 pip install -e .
 chmod +x "`pwd`/bin/extract_regions.sh"
 chmod +x "`pwd`/bin/run_anna16.py"
@@ -69,28 +83,26 @@ extract_regions.sh -i raw_data/input.fasta \
 ### ANNA16 as a Python Library
 
 ```python
-from anna16 import Preprocessing, CopyNumberPredictor
-region = "V1-V2" #Options: [full_length, V1-V2, V1-V3, V3-V4, V4-V5, V4, V6-V8, V7-V9]
+from anna16 import Preprocessing, get_model
 pp = Preprocessing()
 seqs = pp.ReadFASTA(filename)
 kmer_counts = pp.CountKmers(seqs)
-model = CopyNumberPredictor(region=region) 
-model.load(trimmed=True)
+model = get_model(ml_type="cuml") #Switch to "sklearn" if you want to use CPU version
+model.load(region="V1-V2" ) #Options: [full_length, V1-V2, V1-V3, V3-V4, V4-V5, V4, V6-V8, V7-V9]
 copy_number_pred = model.predict(kmer_counts)
 ```
 
 ### ANNA16 as a Command-Line Tool:
 
 ```bash
-run_anna16.py -r <REGION> -t <TRIM> -i <INPUT_FILE(S)> -o <OUTPUT_FILE(S)>
+run_anna16.py -r <REGION> -m <ML LIBRARY> -i <INPUT_FILE(S)> -o <OUTPUT_FILE(S)>
 ```
 
 **Required Parameters:**
 
 `-r` - Region on 16S rRNA gene that the input sequences belong to. Options: `[full_length, V1-V2, V1-V3, V3-V4, V4-V5, V4, V6-V8, V7-V9]`
 
-`-t` - Whether or not the primers of the amplicons have been trimmed off. 
-Options: `[True, False]`
+`-m` - Machine Learning library for PCA, SVR, and Ridge. Options: `[cuml, sklearn]`
 
 `-i` - A list of files of the input sequences.
 
@@ -101,7 +113,7 @@ Options: `[True, False]`
 An example command is:
 
 ```bash
-run_anna16.py -r full_length -t True -i input0.fasta input1.fasta -o pred0 pred1
+run_anna16.py -r full_length -m cuml -i input0.fasta input1.fasta -o pred0 pred1
 ```
 
 # About ANNA16 <a name="about"></a>

@@ -18,10 +18,9 @@ parser.add_argument('-o', '--output', action='append', nargs='*', help='Output F
 args = parser.parse_args()
 
 #Initialize the Model
-current_dir = os.path.dirname(os.path.abspath(__file__))
-model_dir = os.path.join(current_dir, "model_files")
+
 model = get_model(ml_type=args.ml_type)
-model.load(file_prefix=f"{model_dir}/{args.region}/{args.region}")
+model.load(args.region)
 pp = Preprocessing()
 
 #Input FASTA files
