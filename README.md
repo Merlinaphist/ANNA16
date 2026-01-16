@@ -3,9 +3,9 @@
 ## Table of Contents
 
 - [User Guide](#user_guide)
-    - [Installation](#installation-)
-    - [Preprocessing](#preprocessing-)
-    - [Usage](#usage-)
+    - [Installation](#installation)
+    - [Preprocessing](#preprocessing)
+    - [Usage](#usage)
 - [About ANNA16](#about)
 - [Cite ANNA16](#citation)
 
@@ -37,7 +37,7 @@ The input to ANNA16 needs to be:
 
 1. FASTA, FNA, or FA files of **DNA** sequences;
 2. **Positive** strands sequences;
-3. (Recommended) Trimmed by our `extract_regions.sh` script. This script calls [cutadapt](https://cutadapt.readthedocs.io/en/stable/) and the [Primer Table](#primers-) to identify the regions of interest.
+3. (Recommended) Trimmed by our `extract_regions.sh` script. This script calls [cutadapt](https://cutadapt.readthedocs.io/en/stable/) and the [Primer Table](#primers) to identify the regions of interest.
 
 ```bash
 extract_regions.sh -i <input_file> -o <output_prefix> \
