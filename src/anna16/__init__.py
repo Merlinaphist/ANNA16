@@ -244,7 +244,7 @@ class ANNA16ModelSKLEARN(ANNA16Model):
     def load(self, region):
         current_dir = os.path.dirname(os.path.abspath(__file__))
         file_prefix=f"{current_dir}/model_files/{region}/{region}"
-        self.mlp.load(f"{file_prefix}_mlp.pt")
+        self.mlp.load(f"{file_prefix}_mlp.pt", map_location=self.device)
         for model_name in self.ml_models:
             with open(f"{file_prefix}_{model_name}_skl.pkl", 'rb') as file:
                 self.ml_models[model_name] = pickle.load(file)
