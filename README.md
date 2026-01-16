@@ -2,12 +2,12 @@
 
 ## Table of Contents
 
-- [User Guide](#user_guide-)
+- [User Guide](#user_guide)
     - [Installation](#installation-)
     - [Preprocessing](#preprocessing-)
     - [Usage](#usage-)
-- [About ANNA16](#about-)
-- [Cite ANNA16](#citation-)
+- [About ANNA16](#about)
+- [Cite ANNA16](#citation)
 
 # User Guide <a name="user_guide"></a>
 The current page shows ANNA16 (Version 2.0). To install the older versions or learn about the updates in ANNA16, please visit [the wiki](https://github.com/Merlinaphist/ANNA16/wiki).
