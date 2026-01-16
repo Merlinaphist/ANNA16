@@ -37,21 +37,7 @@ The input to ANNA16 needs to be:
 
 1. FASTA, FNA, or FA files of **DNA** sequences;
 2. **Positive** strands sequences;
-3. Trimmed with the following primers:
-
-| Region | Forward Primer Name | Forward Primer Sequence | Reverse Primer Name |Reverse Primer |
-|-------:|--------------------:|------------------------:|-----------:|--------------:|
-| Full Length | 27F | AGA GTT TGA TCC TGG CTC AG     | 1492R | TAC GGY TAC CTT GTT ACG ACT T    |
-| V1-V2       | 27F | AGA GTT TGA TCC TGG CTC AG     | 338R | GCT GCC TCC CGT AGG AGT         |
-| V1-V3       | 27F | AGA GTT TGA TCC TGG CTC AG     | 534R | ATT ACC GCG GCT GCT GG          |
-| V3-V4       | 341F | CCT ACG GGA GGC AGC AG         | 785R | GAC TAC HVG GGT ATC TAA TCC     |
-| V4          | 515F | GTG CCA GCM GCC GCG GTA A      | 806R | GGA CTA CHV GGG TWT CTA AT      |
-| V4-V5       | 515F | GTG CCA GCM GCC GCG GTA A      | 926R | CCG YCA ATT YMT TTR AGT TT      |
-| V6-V8       | 939F | GAA TTG ACG GGG GCC CGC ACA AG | 1378R | CGG TGT GTA CAA GGC CCG GGA ACG |
-| V7-V9       | 1115F | CAA CGA GCG CAA CCC T          | 1492R | TAC GGY TAC CTT GTT ACG ACT T    |
-
-We recommend using the `extract_regions.sh` script to preprocess the input files. 
-This script calls [cutadapt](https://cutadapt.readthedocs.io/en/stable/) to identify the regions of interest.
+3. (Recommended) Trimmed by our `extract_regions.sh` script. This script calls [cutadapt](https://cutadapt.readthedocs.io/en/stable/) to identify the regions of interest using [these primers](#primers-)
 
 ```bash
 extract_regions.sh -i <input_file> -o <output_prefix> \
@@ -123,6 +109,20 @@ run_anna16.py -r full_length -t True -i input0.fasta input1.fasta -o pred0 pred1
 ANNA16 is an end-to-end tool that predicts 16S rRNA gene copy number (GCN) from 16S rRNA gene sequence. The tool utilizes an ensembled architecture of Multi-layer Perceptron (MLP), Support Vector Machine (SVM), and Ridge Regression. This repository releases the model weights of ANNA16.
 
 ![Summary of ANNA16](assets/ANNA16_summary.png)
+
+The regions used in training were obtained from the following primers: <a name="primers"></a>
+
+| Region | Forward Primer Name | Forward Primer Sequence | Reverse Primer Name |Reverse Primer |
+|-------:|--------------------:|------------------------:|-----------:|--------------:|
+| Full Length | 27F | AGA GTT TGA TCC TGG CTC AG     | 1492R | TAC GGY TAC CTT GTT ACG ACT T    |
+| V1-V2       | 27F | AGA GTT TGA TCC TGG CTC AG     | 338R | GCT GCC TCC CGT AGG AGT         |
+| V1-V3       | 27F | AGA GTT TGA TCC TGG CTC AG     | 534R | ATT ACC GCG GCT GCT GG          |
+| V3-V4       | 341F | CCT ACG GGA GGC AGC AG         | 785R | GAC TAC HVG GGT ATC TAA TCC     |
+| V4          | 515F | GTG CCA GCM GCC GCG GTA A      | 806R | GGA CTA CHV GGG TWT CTA AT      |
+| V4-V5       | 515F | GTG CCA GCM GCC GCG GTA A      | 926R | CCG YCA ATT YMT TTR AGT TT      |
+| V6-V8       | 939F | GAA TTG ACG GGG GCC CGC ACA AG | 1378R | CGG TGT GTA CAA GGC CCG GGA ACG |
+| V7-V9       | 1115F | CAA CGA GCG CAA CCC T          | 1492R | TAC GGY TAC CTT GTT ACG ACT T    |
+
 
 
 # Cite ANNA16 <a name="citation"></a>
