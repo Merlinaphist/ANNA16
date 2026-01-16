@@ -110,7 +110,7 @@ ANNA16 is an end-to-end tool that predicts 16S rRNA gene copy number (GCN) from 
 
 ![Summary of ANNA16](assets/ANNA16_summary.png)
 
-### Primer Table <a name="primers"></a>
+## Primer Table <a name="primers"></a>
 The regions used in training were obtained from the following primers: 
 
 | Region | Forward Primer Name | Forward Primer Sequence | Reverse Primer Name |Reverse Primer |
