@@ -37,7 +37,7 @@ The input to ANNA16 needs to be:
 
 1. FASTA, FNA, or FA files of **DNA** sequences;
 2. **Positive** strands sequences;
-3. (Recommended) Trimmed by our `extract_regions.sh` script. This script calls [cutadapt](https://cutadapt.readthedocs.io/en/stable/) to identify the regions of interest using [these primers](#primers-)
+3. (Recommended) Trimmed by our `extract_regions.sh` script. This script calls [cutadapt](https://cutadapt.readthedocs.io/en/stable/) and the [Primer Table](#primers-) to identify the regions of interest.
 
 ```bash
 extract_regions.sh -i <input_file> -o <output_prefix> \
@@ -110,7 +110,8 @@ ANNA16 is an end-to-end tool that predicts 16S rRNA gene copy number (GCN) from 
 
 ![Summary of ANNA16](assets/ANNA16_summary.png)
 
-The regions used in training were obtained from the following primers: <a name="primers"></a>
+### Primer Table <a name="primers"></a>
+The regions used in training were obtained from the following primers: 
 
 | Region | Forward Primer Name | Forward Primer Sequence | Reverse Primer Name |Reverse Primer |
 |-------:|--------------------:|------------------------:|-----------:|--------------:|
