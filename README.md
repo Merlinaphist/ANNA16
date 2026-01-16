@@ -1,23 +1,16 @@
-# About ANNA16
 
-ANNA16 is an end-to-end tool that predicts 16S rRNA gene copy number (GCN) from 16S rRNA gene sequence. The tool utilizes an ensembled architecture of Multi-layer Perceptron (MLP), Support Vector Machine (SVM), and Ridge Regression. This repository releases the model weights of ANNA16.
-
-![Summary of ANNA16](assets/ANNA16_summary.png)
 
 ## Table of Contents
 
 - [User Guide](#user_guide-)
-    - [Update Log](#updates-)
     - [Installation](#installation-)
     - [Preprocessing](#preprocessing-)
     - [Usage](#usage-)
+- [About ANNA16](#about-)
 - [Cite ANNA16](#citation-)
 
 # User Guide <a name="user_guide"></a>
-
-## Update Log <a name="updates"></a>
-
-To install the older `v1.0` version or learn about the updates in ANNA16, please visit [the wiki](https://github.com/Merlinaphist/ANNA16/wiki).
+The current page shows ANNA16 (Version 2.0). To install the older versions or learn about the updates in ANNA16, please visit [the wiki](https://github.com/Merlinaphist/ANNA16/wiki).
 
 ## Installation <a name="installation"></a>
 
@@ -124,6 +117,13 @@ An example command is:
 ```bash
 run_anna16.py -r full_length -t True -i input0.fasta input1.fasta -o pred0 pred1
 ```
+
+# About ANNA16 <a name="about"></a>
+
+ANNA16 is an end-to-end tool that predicts 16S rRNA gene copy number (GCN) from 16S rRNA gene sequence. The tool utilizes an ensembled architecture of Multi-layer Perceptron (MLP), Support Vector Machine (SVM), and Ridge Regression. This repository releases the model weights of ANNA16.
+
+![Summary of ANNA16](assets/ANNA16_summary.png)
+
 
 # Cite ANNA16 <a name="citation"></a>
 
