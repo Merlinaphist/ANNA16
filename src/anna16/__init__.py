@@ -10,6 +10,7 @@ from torch.utils.data import DataLoader
 import numpy as np
 import pandas as pd
 import pickle, os
+from multiprocessing import Pool, cpu_count
 
 
 class Preprocessing():
@@ -36,7 +37,9 @@ class Preprocessing():
 
     def CountKmers(self,seqs):
         if type(seqs) in [type([]),type(pd.core.series.Series([1]))]:
-            kmer = pd.Series(seqs).apply(lambda x: self.seq2kmer(x, self.k_size))
+            with Pool(cpu_count()) as p:
+                kmer = p.map(self.seq2kmer, seqs)
+            # kmer = pd.Series(seqs).apply(lambda x: self.seq2kmer(x, self.k_size))
             transformed_X = self.vectorizer.transform(kmer).toarray()
             return transformed_X
         else:

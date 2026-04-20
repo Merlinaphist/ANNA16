@@ -18,7 +18,7 @@ The current page shows ANNA16 (Version 2.0). To install the older versions or le
 We recommend create a separate environment to host ANNA16. 
 
 (Optional) ANNA16-v2.0 requires [cuml](https://github.com/rapidsai/cuml) for GPU-accelerated SVM. Please go download the version compatible with your CUDA.
-This step can be skipped if you want to use CPU version or meet compatibility issues. 
+This step can be skipped if you want to use CPU version or encounter compatibility issues. 
 
 ```bash
 wget https://github.com/Merlinaphist/ANNA16/archive/refs/tags/v2.0.0.zip
