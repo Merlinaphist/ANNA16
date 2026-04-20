@@ -39,7 +39,7 @@ class Preprocessing():
         if type(seqs) in [type([]),type(pd.core.series.Series([1]))]:
             with Pool(cpu_count()) as p:
                 kmer = p.map(self.seq2kmer, seqs)
-            # kmer = pd.Series(seqs).apply(lambda x: self.seq2kmer(x, self.k_size))
+            # kmer = pd.Series(seqs).apply(lambda x: self.seq2kmer(x))
             transformed_X = self.vectorizer.transform(kmer).toarray()
             return transformed_X
         else:
