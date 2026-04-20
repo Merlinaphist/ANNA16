@@ -29,10 +29,10 @@ class Preprocessing():
                 ret += self.ref_kmers(current_kmer+nt,current_depth-1)
             return ret
 
-    def seq2kmer(self, seq, k):
+    def seq2kmer(self, seq):
         kmer = ""
-        for i in range(0,len(seq)-k,1):
-            kmer += seq[i:i+k]+" "
+        for i in range(0,len(seq)-self.k_size,1):
+            kmer += seq[i:i+self.k_size]+" "
         return kmer[:-1]
 
     def CountKmers(self,seqs):
