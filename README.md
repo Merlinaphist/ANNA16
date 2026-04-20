@@ -21,9 +21,10 @@ We recommend create a separate environment to host ANNA16.
 This step can be skipped if you want to use CPU version or encounter compatibility issues. 
 
 ```bash
-wget https://github.com/Merlinaphist/ANNA16/archive/refs/tags/v2.0.0.zip
-unzip v2.0.0.zip
-cd ANNA16-2.0.0
+version=2.0.1
+wget https://github.com/Merlinaphist/ANNA16/archive/refs/tags/v${version}.zip
+unzip v${version}.zip
+cd ANNA16-${version}
 micromamba create -n anna16_v2 python=3.12 cutadapt=5.0
 micromamba activate anna16_v2
 
