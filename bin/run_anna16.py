@@ -33,7 +33,7 @@ if args.output is not None and len(args.output) != len(args.input):
 
 # Initialize the Model
 model = get_model(ml_type=args.ml_type)
-model.load(args.region)
+model.load(args.region.replace("-", "_"))
 pp = Preprocessing()
 
 # Input FASTA files
@@ -56,6 +56,7 @@ for task_name in task_names:
         index=uploaded_seqs[task_name]['seqid'],
         columns=["predicted_copy_number"],
     )
+
 
 # Save Prediction Results
 for i, task_name in enumerate(task_names):
