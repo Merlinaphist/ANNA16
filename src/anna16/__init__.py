@@ -138,7 +138,10 @@ default_mlp_params = {
     'hidden_config':[[489, "gelu"], [926, "relu"], [645, "relu"], [929, "elu"], [582, "gelu"], [82, "linear"]],
     "learning_rate": 0.00016770313599,
     "epochs": 59,
-    "batch_size": 100
+    "batch_size": 100,
+    "early_stopping": True,
+    "patience": 10,
+    "min_delta": 0.001
 }
 
 default_ml_params = {
@@ -167,7 +170,16 @@ class ANNA16Model():
         self.loss_func = RMSELoss()
     
     def fit_mlp(self, X_train, Y_train, X_val=None, Y_val=None):
-        """Train the PyTorch MLP model"""
+        """Train the MLP, optionally stopping on validation RMSE.
+
+        Without validation data, train for all configured epochs. When early
+        stopping is enabled, restore the lowest-validation-RMSE weights even
+        if the maximum epoch count is reached.
+        """
+        if (X_val is None) != (Y_val is None):
+            raise ValueError("X_val and Y_val must be provided together")
+        if X_val is not None and (len(X_val) == 0 or len(X_val) != len(Y_val)):
+            raise ValueError("Validation data must be non-empty and have matching lengths")
         train_dataloader = DataLoader(RRNDataset(X_train, Y_train, device=self.device), batch_size=self.batch_size, shuffle=True)
         if X_val is not None and Y_val is not None:
             val_dataloader = DataLoader(RRNDataset(X_val, Y_val, device=self.device), batch_size=self.batch_size, shuffle=False)
@@ -177,6 +189,13 @@ class ANNA16Model():
         optimizer = optim.Adam(self.mlp.parameters(), lr=self.learning_rate)
         # Training loop
         loss_history = {"train_loss": []} if val_dataloader is None else {"train_loss": [], "val_loss": []}
+        use_early_stopping = self.early_stopping and val_dataloader is not None
+        best_val_loss = float("inf")
+        patience_reference_loss = float("inf")
+        best_weights = None
+        epochs_without_improvement = 0
+        self.best_epoch_ = None
+        self.stopped_epoch_ = None
         for epoch in range(self.epochs):
             train_epoch_loss = 0.0
             self.mlp.train()
@@ -188,16 +207,35 @@ class ANNA16Model():
                 optimizer.step()
                 train_epoch_loss += loss.item()
             loss_history["train_loss"].append(train_epoch_loss / len(train_dataloader))
-            # Validation (optional, for monitoring)
+            # Compute RMSE over all validation elements.
             if val_dataloader is not None:
                 self.mlp.eval()
-                val_epoch_loss = 0.0
+                val_squared_error = 0.0
+                val_element_count = 0
                 with torch.no_grad():
                     for batch_X, batch_Y in val_dataloader:
                         val_outputs = self.mlp(batch_X)
-                        val_loss = self.loss_func(val_outputs, batch_Y).item()
-                        val_epoch_loss += val_loss
-                loss_history["val_loss"].append(val_epoch_loss / len(val_dataloader))
+                        val_squared_error += torch.sum((val_outputs - batch_Y) ** 2).item()
+                        val_element_count += batch_Y.numel()
+                val_epoch_loss = np.sqrt(val_squared_error / val_element_count)
+                loss_history["val_loss"].append(val_epoch_loss)
+                if use_early_stopping:
+                    if not np.isfinite(val_epoch_loss):
+                        raise ValueError("Validation RMSE is not finite")
+                    if val_epoch_loss < best_val_loss:
+                        best_val_loss = val_epoch_loss
+                        best_weights = deepcopy(self.mlp.state_dict())
+                        self.best_epoch_ = epoch + 1
+                    if val_epoch_loss < patience_reference_loss - self.min_delta:
+                        patience_reference_loss = val_epoch_loss
+                        epochs_without_improvement = 0
+                    else:
+                        epochs_without_improvement += 1
+                    if epochs_without_improvement >= self.patience:
+                        self.stopped_epoch_ = epoch + 1
+                        break
+        if best_weights is not None:
+            self.mlp.load_state_dict(best_weights)
         return loss_history
     
     def fit(self, X_train, Y_train, X_val=None, Y_val=None, verbose=True, return_history=False):
