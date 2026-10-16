@@ -10,7 +10,7 @@ from torch.utils.data import DataLoader
 import numpy as np
 import pandas as pd
 import pickle, os
-from multiprocessing import Pool, cpu_count
+# from multiprocessing import Pool, cpu_count
 
 
 class Preprocessing():
@@ -22,10 +22,10 @@ class Preprocessing():
 
     def ref_kmers(self, current_kmer, current_depth):
         if current_depth == 1:
-            return [current_kmer+"a",current_kmer+"u",current_kmer+"c",current_kmer+"g"]
+            return [current_kmer+"a",current_kmer+"t",current_kmer+"c",current_kmer+"g"]
         else:
             ret = self.ref_kmers(current_kmer+"a",current_depth-1)
-            for nt in ['u','c','g']:
+            for nt in ['t','c','g']:
                 ret += self.ref_kmers(current_kmer+nt,current_depth-1)
             return ret
 
@@ -37,9 +37,10 @@ class Preprocessing():
 
     def CountKmers(self,seqs):
         if type(seqs) in [type([]),type(pd.core.series.Series([1]))]:
-            with Pool(cpu_count()) as p:
-                kmer = p.map(self.seq2kmer, seqs)
-            # kmer = pd.Series(seqs).apply(lambda x: self.seq2kmer(x))
+            standardized_seqs = pd.Series(seqs).str.upper().str.replace('U', 'T')
+            # with Pool(cpu_count()) as p:
+            #     kmer = p.map(self.seq2kmer, standardized_seqs)
+            kmer = pd.Series(standardized_seqs).apply(lambda x: self.seq2kmer(x))
             transformed_X = self.vectorizer.transform(kmer).toarray()
             return transformed_X
         else:
