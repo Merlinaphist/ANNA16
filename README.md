@@ -10,6 +10,9 @@
 - [Cite ANNA16](#citation)
 
 # User Guide <a name="user_guide"></a>
+**Oct 2026 Update:**
+[The Colab notebook for ANNA16](https://drive.google.com/file/d/1A2cbQmW8IjLg00OlR7ElU9BH6973HJ9e/view?usp=sharing) is available again.
+
 **Jan 2026 Update:**
 The current page shows ANNA16 (Version 2.0). To install the older versions or learn about the updates in ANNA16, please visit [the wiki](https://github.com/Merlinaphist/ANNA16/wiki).
 
