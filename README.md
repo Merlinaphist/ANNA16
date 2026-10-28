@@ -24,7 +24,7 @@ We recommend create a separate environment to host ANNA16.
 This step can be skipped if you want to use CPU version or encounter compatibility issues. 
 
 ```bash
-version=2.0.0-beta.1
+version=2.0.0-beta.2
 wget https://github.com/Merlinaphist/ANNA16/archive/refs/tags/v${version}.zip
 unzip v${version}.zip
 cd ANNA16-${version}
